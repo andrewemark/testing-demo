@@ -1,3 +1,5 @@
+import pytest
+
 from demo.affine import Transform2D
 import numpy.testing as npt
 import numpy as np
@@ -52,3 +54,15 @@ def test_construct_from_numpy():
     t = Transform2D(tmat)
 
     npt.assert_array_equal(tmat, t.to_numpy())
+
+
+def test_invalid_construct_from_numpy():
+    tmat = np.array(
+        [
+            [1, 0, 2],
+            [0, -1, 0],
+        ]
+    ).astype(float)
+
+    with pytest.raises(ValueError):
+        Transform2D(tmat)
