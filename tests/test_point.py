@@ -1,5 +1,6 @@
+from demo.affine import Transform2D
 from demo.point import Point
-from demo import affine
+
 import numpy.testing as npt
 
 
@@ -17,9 +18,13 @@ class TestPoint:
         npt.assert_allclose(result.x, 3.11)
         npt.assert_allclose(result.y, -4.12)
 
+    def test_inplace_add(self):
+        ...
+
     def test_transform_point(self):
         p = Point(1.0, -1.0)
-        result = p.transform(affine.translate(-1.0, 1.0), in_place=False)
+        trans = Transform2D().translate(-1.0, 1.0)
+        result = p.transform(trans, in_place=False)
         npt.assert_allclose(result.x, 0.0)
         npt.assert_allclose(result.y, 0.0)
 
@@ -28,7 +33,8 @@ class TestPoint:
 
     def test_transform_inplace(self):
         p = Point(1.0, -1.0)
-        result = p.transform(affine.translate(-1.0, 1.0), in_place=True)
+        trans = Transform2D().translate(-1.0, 1.0)
+        result = p.transform(trans, in_place=True)
         assert result is None
         npt.assert_allclose(p.x, 0.0)
         npt.assert_allclose(p.y, 0.0)
