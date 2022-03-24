@@ -48,21 +48,21 @@ class Transform2D:
         if self._M.shape != (3, 3):
             raise ValueError("2D Transformation matrix must be 3x3")
 
-    def scale(self, sx: float = 1.0, sy: float = 1.0):
+    def scale(self, sx: float = 1.0, sy: float = 1.0) -> "Transform2D":
         M_scale = _scale(sx, sy)
         self._M = M_scale @ self._M
         return self
 
-    def translate(self, tx: float = 0.0, ty: float = 0.0):
+    def translate(self, tx: float = 0.0, ty: float = 0.0) -> "Transform2D":
         M_translate = _translate(tx, ty)
         self._M = M_translate @ self._M
         return self
 
-    def inverse(self):
+    def inverse(self) -> "Transform2D":
         return Transform2D(np.linalg.inv(self._M))
 
-    def transform_point(self, x, y):
+    def transform_point(self, x, y) -> np.ndarray:
         return (self._M @ np.array([x, y, 1]).T)[:2]
 
-    def to_numpy(self):
+    def to_numpy(self) -> np.ndarray:
         return self._M.copy()

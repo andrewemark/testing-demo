@@ -29,6 +29,34 @@ optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
 
 [[package]]
+name = "hypothesis"
+version = "6.39.4"
+description = "A library for property-based testing"
+category = "dev"
+optional = false
+python-versions = ">=3.7"
+
+[package.dependencies]
+attrs = ">=19.2.0"
+sortedcontainers = ">=2.1.0,<3.0.0"
+
+[package.extras]
+all = ["black (>=19.10b0)", "click (>=7.0)", "django (>=2.2)", "dpcontracts (>=0.4)", "lark-parser (>=0.6.5)", "libcst (>=0.3.16)", "numpy (>=1.9.0)", "pandas (>=0.25)", "pytest (>=4.6)", "python-dateutil (>=1.4)", "pytz (>=2014.1)", "redis (>=3.0.0)", "rich (>=9.0.0)", "importlib-metadata (>=3.6)", "backports.zoneinfo (>=0.2.1)", "tzdata (>=2021.5)"]
+cli = ["click (>=7.0)", "black (>=19.10b0)", "rich (>=9.0.0)"]
+codemods = ["libcst (>=0.3.16)"]
+dateutil = ["python-dateutil (>=1.4)"]
+django = ["django (>=2.2)"]
+dpcontracts = ["dpcontracts (>=0.4)"]
+ghostwriter = ["black (>=19.10b0)"]
+lark = ["lark-parser (>=0.6.5)"]
+numpy = ["numpy (>=1.9.0)"]
+pandas = ["pandas (>=0.25)"]
+pytest = ["pytest (>=4.6)"]
+pytz = ["pytz (>=2014.1)"]
+redis = ["redis (>=3.0.0)"]
+zoneinfo = ["backports.zoneinfo (>=0.2.1)", "tzdata (>=2021.5)"]
+
+[[package]]
 name = "more-itertools"
 version = "8.12.0"
 description = "More routines for operating on iterables, beyond itertools"
@@ -119,6 +147,14 @@ python-versions = ">=3.8,<3.11"
 numpy = ">=1.17.3,<1.25.0"
 
 [[package]]
+name = "sortedcontainers"
+version = "2.4.0"
+description = "Sorted Containers -- Sorted List, Sorted Dict, Sorted Set"
+category = "dev"
+optional = false
+python-versions = "*"
+
+[[package]]
 name = "wcwidth"
 version = "0.2.5"
 description = "Measures the displayed width of unicode strings in a terminal"
@@ -129,7 +165,7 @@ python-versions = "*"
 [metadata]
 lock-version = "1.1"
 python-versions = "3.9"
-content-hash = "a244810225b85ae2bcb4c4987163959d908c4e218b5770163715c5b51c71eb48"
+content-hash = "f0fbb287db16b239d298c5605ef81bdcfed5b3c1578fdc50b17f95f7d5e3665d"
 
 [metadata.files]
 atomicwrites = [
@@ -143,6 +179,10 @@ attrs = [
 colorama = [
     {file = "colorama-0.4.4-py2.py3-none-any.whl", hash = "sha256:9f47eda37229f68eee03b24b9748937c7dc3868f906e8ba69fbcbdd3bc5dc3e2"},
     {file = "colorama-0.4.4.tar.gz", hash = "sha256:5941b2b48a20143d2267e95b1c2a7603ce057ee39fd88e7329b0c292aa16869b"},
+]
+hypothesis = [
+    {file = "hypothesis-6.39.4-py3-none-any.whl", hash = "sha256:41503e20a246ab4522d78f2df8afc40fd7349eeaf0fe07cdc233069c671e6e35"},
+    {file = "hypothesis-6.39.4.tar.gz", hash = "sha256:f60b1dfaa8c2175c40513449f9c49b7543d50e66e16a5e22cf5fca460e864037"},
 ]
 more-itertools = [
     {file = "more-itertools-8.12.0.tar.gz", hash = "sha256:7dc6ad46f05f545f900dd59e8dfb4e84a4827b97b3cfecb175ea0c7d247f6064"},
@@ -214,6 +254,10 @@ scipy = [
     {file = "scipy-1.8.0-cp39-cp39-win32.whl", hash = "sha256:3d573228c10a3a8c32b9037be982e6440e411b443a6267b067cac72f690b8d56"},
     {file = "scipy-1.8.0-cp39-cp39-win_amd64.whl", hash = "sha256:bb7088e89cd751acf66195d2f00cf009a1ea113f3019664032d9075b1e727b6c"},
     {file = "scipy-1.8.0.tar.gz", hash = "sha256:31d4f2d6b724bc9a98e527b5849b8a7e589bf1ea630c33aa563eda912c9ff0bd"},
+]
+sortedcontainers = [
+    {file = "sortedcontainers-2.4.0-py2.py3-none-any.whl", hash = "sha256:a163dcaede0f1c021485e957a39245190e74249897e2ae4b2aa38595db237ee0"},
+    {file = "sortedcontainers-2.4.0.tar.gz", hash = "sha256:25caa5a06cc30b6b83d11423433f65d1f9d76c4c6a0c90e3379eaa43b9bfdb88"},
 ]
 wcwidth = [
     {file = "wcwidth-0.2.5-py2.py3-none-any.whl", hash = "sha256:beb4802a9cebb9144e99086eff703a642a13d6a0052920003a230f3294bbe784"},

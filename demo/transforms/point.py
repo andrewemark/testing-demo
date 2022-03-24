@@ -1,5 +1,6 @@
 from dataclasses import dataclass
-from demo.affine import Transform2D
+
+from .affine import Transform2D
 
 
 @dataclass

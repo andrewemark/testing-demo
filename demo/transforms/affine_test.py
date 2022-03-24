@@ -1,8 +1,8 @@
 import pytest
-
-from demo.affine import Transform2D
 import numpy.testing as npt
 import numpy as np
+
+from .affine import Transform2D
 
 
 def test_identity():

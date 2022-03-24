@@ -1,7 +1,8 @@
-from demo.affine import Transform2D
-from demo.point import Point
+from .affine import Transform2D
+from .point import Point
 
 import numpy.testing as npt
+import pytest
 
 
 class TestPoint:
@@ -13,10 +14,19 @@ class TestPoint:
     def test_add(self):
         p = Point(2.0, -3.0)
         result = p + Point(1.11, -1.12)
+
+        # Bad floating point comparison!
         # assert result.x == 3.11
         # assert result.y == -1.22
+
+        # A numpy test function version
         npt.assert_allclose(result.x, 3.11)
         npt.assert_allclose(result.y, -4.12)
+
+        # A pytest version
+        assert result.x == pytest.approx(3.11)
+        assert result.y == pytest.approx(-4.12)
+
 
     def test_inplace_add(self):
         ...
