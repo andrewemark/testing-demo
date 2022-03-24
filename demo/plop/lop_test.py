@@ -151,6 +151,6 @@ def test_python_and_rust_parity(rows, cols):
     y_hat_rust = A_rust.forward(x)
     x_hat_rust = A_rust.adjoint(y)
 
-    assert np.allclose(x_hat_python, x_hat_rust, rtol=1e-3, atol=1e-5)
-    assert np.allclose(y_hat_python, y_hat_rust, rtol=1e-3, atol=1e-5)
+    assert np.allclose(x_hat_python, x_hat_rust)
+    assert np.allclose(y_hat_python, y_hat_rust)
     A_rust.free()
