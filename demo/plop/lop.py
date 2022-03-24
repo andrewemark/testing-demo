@@ -43,3 +43,15 @@ class RDenseMatrix(LinearOperator):
 
     def adjoint(self, y: npt.NDArray[np.float64]) -> npt.NDArray[np.float64]:
         return rw.adjoint(self.obj, self.num_rows, self.num_cols, y)
+
+
+class MatrixFreeDCRemoval(LinearOperator):
+    def __init__(self):
+        pass
+
+    def forward(self, x: npt.NDArray[np.float64]) -> npt.NDArray[np.float64]:
+        dc = np.mean(x)
+        return (x - dc).astype(np.float64)
+
+    def adjoint(self, y: npt.NDArray[np.float64]) -> npt.NDArray[np.float64]:
+        return self.forward(y)

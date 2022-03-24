@@ -61,6 +61,23 @@ def test_rmatrix_basic():
     A.free()
 
 
+def test_matrix_free_dc_removal_same_as_with_matrix():
+    x_in = np.array([1.0, 2.0, 3.0])
+    y_in = np.array([4.0, 5.0, 6.0])
+
+    A_mat_free = lop.MatrixFreeDCRemoval()
+    # A = (I - (1 / N) * 1_mat)
+    A_mat = np.identity(3) - (1.0 / 3.0) * np.ones(
+        (
+            3,
+            3,
+        )
+    )
+
+    assert np.allclose(A_mat @ x_in, A_mat_free.forward(x_in))
+    assert np.allclose(A_mat.T @ y_in, A_mat_free.adjoint(y_in))
+
+
 ## ------------------------------------------------------------------------- ##
 ##                              Property Tests                               ##
 ## ------------------------------------------------------------------------- ##
@@ -71,7 +88,7 @@ def test_rmatrix_basic():
 @given(
     st.integers(min_value=1, max_value=1_000), st.integers(min_value=1, max_value=1_000)
 )
-def test_for_adjoint_test_invariant_python(rows, cols):
+def test_for_adjoint_test_invariant_dense_matrix_python(rows, cols):
     x = np.random.rand(cols).astype(np.float64)
     y = np.random.rand(rows).astype(np.float64)
 
@@ -88,7 +105,7 @@ def test_for_adjoint_test_invariant_python(rows, cols):
 @given(
     st.integers(min_value=1, max_value=1_000), st.integers(min_value=1, max_value=1_000)
 )
-def test_for_adjoint_test_invariant_rust(rows, cols):
+def test_for_adjoint_test_invariant_dense_matrix_rust(rows, cols):
     x = np.random.rand(cols).astype(np.float64)
     y = np.random.rand(rows).astype(np.float64)
 
@@ -99,6 +116,21 @@ def test_for_adjoint_test_invariant_rust(rows, cols):
 
     assert np.isclose(np.dot(x, x_hat), np.dot(y, y_hat))
     A.free()
+
+
+@settings(verbosity=Verbosity.verbose)
+@example(10)
+@given(st.integers(min_value=1, max_value=1_000))
+def test_for_adjoint_test_invariant_matrix_free_dc_removal_python(square_dim):
+    x = np.random.rand(square_dim).astype(np.float64)
+    y = np.random.rand(square_dim).astype(np.float64)
+
+    A = lop.MatrixFreeDCRemoval()
+
+    y_hat = A.forward(x)
+    x_hat = A.adjoint(y)
+
+    assert np.isclose(np.dot(x, x_hat), np.dot(y, y_hat))
 
 
 @settings(verbosity=Verbosity.verbose)
